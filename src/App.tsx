@@ -8,11 +8,12 @@ import Index from "./pages/Index";
 
 const queryClient = new QueryClient();
 
-// Replace with your actual Clerk publishable key
-const clerkPubKey = "pk_test_YOUR_CLERK_KEY";
+if (!import.meta.env.VITE_CLERK_PUBLISHABLE_KEY) {
+  throw new Error("Missing Clerk Publishable Key");
+}
 
 const App = () => (
-  <ClerkProvider publishableKey={clerkPubKey}>
+  <ClerkProvider publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
